@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import Items from "./components/Items";
+import AddItem from "./components/AddItem";
 
 function App() {
   const [items, setItems] = useState([
@@ -21,6 +22,10 @@ function App() {
     },
   ]);
 
+  const addItem = (text) => {
+    console.log("New item added with text:", text);
+  };
+
   const deleteItem = (id) => {
     setItems(items.filter((item) => item.id !== id));
   };
@@ -40,6 +45,7 @@ function App() {
   return (
     <div className="container">
       <Header />
+      <AddItem onSubmit={addItem} />
       <Items items={items} onCheck={toggleItem} onClick={deleteItem} />
     </div>
   );
