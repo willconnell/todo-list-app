@@ -1,41 +1,48 @@
-import { useState } from 'react'
-import Header from './components/Header'
-import Items from './components/Items'
+import { useState } from "react";
+import Header from "./components/Header";
+import Items from "./components/Items";
 
 function App() {
-    const [items, setItems] = useState([
-        {
-            id: 1,
-            text: 'Walk the dog',
-            completed: true
-        },
-        {
-            id: 2,
-            text: 'Another item',
-            completed: false
-        },
-        {
-            id: 3,
-            text: 'Something to do',
-            completed: true
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      text: "Walk the dog",
+      completed: true,
+    },
+    {
+      id: 2,
+      text: "Another item",
+      completed: false,
+    },
+    {
+      id: 3,
+      text: "Something to do",
+      completed: true,
+    },
+  ]);
+
+  const deleteItem = (id) => {
+    setItems(items.filter((item) => item.id !== id));
+  };
+
+  const toggleItem = (id) => {
+    setItems(
+      items.map((item) => {
+        if (item.id === id) {
+          return { ...item, completed: !item.completed };
+        } else {
+          return item;
         }
-    ])
-
-    const completeTask = (id) => {
-        console.log('Task', id, 'completed')
-        // setItems(items.map((item) =>
-        //     id === item.id
-        //         ? { ...item, completed: !item.completed }
-        //         : item)
-        // )
-    }
-
-    return (
-        <div className="container">
-            <Header />
-            <Items items={items} onComplete={completeTask} />
-        </div>
+      })
     );
+  };
+
+  return (
+    <div className="container">
+      <Header />
+      <Items items={items} onCheck={toggleItem} onClick={deleteItem} />
+    </div>
+  );
 }
 
 export default App;

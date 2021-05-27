@@ -1,35 +1,38 @@
-import React from 'react'
-import { useState } from 'react'
-// import { FaTimes } from 'react-icons/fa'
+import React from "react";
+import { useState } from "react";
+import { FaTimes } from "react-icons/fa";
 
 const Item = (props) => {
-    const [completed, setCompleted] = useState(false)
+  const [completed, setCompleted] = useState(props.items.completed);
 
-    const completedStyle = {
-        textDecoration: 'line-through',
-        color: 'grey'
-    }
+  const completedStyle = {
+    textDecoration: "line-through",
+    color: "grey",
+  };
 
-    return (
-        <div className="card m-2">
-            <div className="card-body">
-                <input className="me-3"
-                    type="checkbox"
-                    checked={completed}
-                    onChange={(e) => {
-                        setCompleted(e.currentTarget.checked)
-                        console.log('changed')
-                    }
-                    }></input>
-                {completed
-                    ? <span style={completedStyle}>{props.items.text}</span>
-                    : <span>{props.items.text}</span>}
+  return (
+    <div className="card m-2">
+      <div className="card-body">
+        <input
+          className="me-3"
+          type="checkbox"
+          checked={completed}
+          onChange={(e) => {
+            setCompleted(e.currentTarget.checked);
+            props.onCheck(props.items.id);
+          }}
+        ></input>
 
-                {completed ? (item) => props.onComplete(item.id) : ''}
+        {completed ? (
+          <span style={completedStyle}>{props.items.text}</span>
+        ) : (
+          <span>{props.items.text}</span>
+        )}
 
-            </div>
-        </div>
-    )
-}
+        <FaTimes onClick={() => props.onClick(props.items.id)} />
+      </div>
+    </div>
+  );
+};
 
-export default Item
+export default Item;
