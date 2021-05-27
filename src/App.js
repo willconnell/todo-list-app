@@ -4,26 +4,37 @@ import Items from "./components/Items";
 import AddItem from "./components/AddItem";
 
 function App() {
+  const [addShowing, setAddShowing] = useState(false);
   const [items, setItems] = useState([
     {
       id: 1,
       text: "Walk the dog",
-      completed: true,
+      completed: false,
     },
     {
       id: 2,
-      text: "Another item",
+      text: "Go to the grocery store",
       completed: false,
     },
     {
       id: 3,
-      text: "Something to do",
-      completed: true,
+      text: "Clean room",
+      completed: false,
     },
   ]);
 
+  const toggleAddShowing = () => {
+    console.log("toggle add-showing");
+    setAddShowing(!addShowing);
+  };
+
   const addItem = (text) => {
-    console.log("New item added with text:", text);
+    if (text === "") {
+      alert("Please enter a task");
+    } else {
+      const id = Math.floor(Math.random() * 10000) + 1;
+      setItems([...items, { id: id, text: text, completed: false }]);
+    }
   };
 
   const deleteItem = (id) => {
@@ -44,9 +55,14 @@ function App() {
 
   return (
     <div className="container">
-      <Header />
-      <AddItem onSubmit={addItem} />
-      <Items items={items} onCheck={toggleItem} onClick={deleteItem} />
+      <Header onAdd={toggleAddShowing} showing={addShowing} />
+      {addShowing ? <AddItem onSubmit={addItem} /> : ""}
+
+      {items.length === 0 ? (
+        <p className="text-center m-3">No Tasks to Show</p>
+      ) : (
+        <Items items={items} onCheck={toggleItem} onClick={deleteItem} />
+      )}
     </div>
   );
 }
