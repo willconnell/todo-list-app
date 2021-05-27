@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import Header from './components/Header'
+import Items from './components/Items'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [items, setItems] = useState([
+        {
+            id: 1,
+            text: 'Walk the dog',
+            completed: true
+        },
+        {
+            id: 2,
+            text: 'Another item',
+            completed: false
+        },
+        {
+            id: 3,
+            text: 'Something to do',
+            completed: true
+        }
+    ])
+
+    const completeTask = (id) => {
+        console.log('Task', id, 'completed')
+        // setItems(items.map((item) =>
+        //     id === item.id
+        //         ? { ...item, completed: !item.completed }
+        //         : item)
+        // )
+    }
+
+    return (
+        <div className="container">
+            <Header />
+            <Items items={items} onComplete={completeTask} />
+        </div>
+    );
 }
 
 export default App;
