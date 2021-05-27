@@ -5,5 +5,5 @@ This is a simple to-do list web application made with React JS (and styling done
 Tutorial: https://www.youtube.com/watch?v=w7ejDZ8SWv8&t=1506s
 
 ## Screenshots
-![Screenshot 1](screenshot1.png)
-![Screenshot 2](screenshot2.png)
+![Screenshot 1](screenshots/screenshot1.png)
+![Screenshot 2](screenshots/screenshot2.png)
